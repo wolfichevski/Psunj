@@ -285,6 +285,10 @@
 
         <form id="bookingForm" class="booking" method="POST">
           <input type="hidden" name="access_key" value="349cc8d7-7edf-4ece-8e5b-f5d72815e088">
+          <div style="display:none;">
+            <label for="honeypot">Botina:</label>
+            <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off" />
+          </div>
 
           <div class="grid-2">
             <input type="text" name="name" placeholder="Ime i prezime" required />
@@ -355,6 +359,10 @@
       const form = e.target;
       const formData = new FormData(form);
 
+        if (formData.get("honeypot")) {
+          console.log("Bot!");
+          return;
+          }
       try {
         const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
